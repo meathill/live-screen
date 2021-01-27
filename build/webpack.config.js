@@ -57,4 +57,7 @@ module.exports = {
       template: resolve(__dirname, '../src/template/index.pug'),
     }),
   ],
+  devServer: {
+    port: 8090,
+  },
 };
