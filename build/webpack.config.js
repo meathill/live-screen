@@ -37,6 +37,18 @@ module.exports = {
         test: /\.vue$/,
         use: 'vue-loader',
       },
+      {
+        test: /\.(png|jpg|gif|svg|woff2|eot|woff|ttf|ico)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              limit: 10000,
+              name: 'assets/[name].[hash].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {
