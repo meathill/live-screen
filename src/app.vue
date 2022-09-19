@@ -1,6 +1,6 @@
 <template lang="pug">
 #app
-  header.row.mb-5
+  header.row
     .col-4
       img.img-thumbnail(
         src="@/assets/avatar.png",
@@ -15,36 +15,45 @@
         | -
         strong.ml-2 10:00
 
-  .alert.alert-success.mb-1(hidden)
-    h3 🎁 下播前有抽奖！🎁
-    p 抽奖方式：
-    p 从今天的弹幕中随机抽一位同学
-    p 抽奖时必须在直播间
+  .alert.alert-success.mb-3(hidden)
+    h3 🎁 周三弹幕抽奖！🎁
+    p.mb-0 抽奖方式：
+      br
+      | 从弹幕中随机抽一位同学
+      br
+      | 送一本《CSS新世界》
+      br
+      | 直播期间任意弹幕均可
 
   h2 今日内容
   ul
-    li 9:00-9:05 准备直播
-    li 9:05-9:20 聊聊前端架构
-    li 9:20-9:45 开发 BB 酱
-    li 9:45-10:00 答疑
+    li Hackthon 颁奖典礼
+    li 弹幕抽两本书，发送任意弹幕即可
 
-  h4.mt-auto 问题待聊
-  ul
-    li 肉大 顺便再谈谈 前端架构 前端有架构吗
 
-  h4.mt-auto 招聘啦
-  ul
-    li 🎉 北京 每日优鲜 高级前端
-      br
-      | 🎉 薪资股票看水平 16薪
+  h2 免费线上研习班：Vue3 开发扫雷游戏
+  h3 周日下午 3:00 - 5:00
+  h3 有意者加微信：wakabanga
+
+
+  h4.mt-auto 招聘啦，有意者请联系我
+  div
+    strong 🎉 Code.fun / API7 招聘前端
+    br
+    | 💰 薪资面议
+    br
+    | 📍 全职远程 / 深圳办公室
+    br
+    | 🎉 五险一金
+    br
+    | ✈️ 发展前景广阔
+
 
   footer.mt-auto 有问题请随时提出，我会不定时回答
     br
     | 小课堂 QQ群：628056148
     br
-    | OR Nav 群：872388997
-    br
-    | 微信：wakabanga
+    | 微信号：wakabanga
     br
     | 微博：@meathill
     br
