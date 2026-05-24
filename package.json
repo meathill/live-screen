@@ -1,34 +1,42 @@
 {
   "name": "live-screen",
-  "version": "1.0.0",
-  "description": "My live screen helper",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Mui Studio 直播 overlay 框架：OBS overlay + 控制台",
+  "private": true,
   "scripts": {
-    "lint": "eslint --fix --ext=.js,.vue ./",
-    "serve": "vite",
-    "build": "vite build"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "db:migrate:local": "wrangler d1 migrations apply live-screen-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply live-screen-db --remote",
+    "format": "biome check --write .",
+    "lint": "biome lint .",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/meathill/live-screen.git"
   },
-  "keywords": [],
   "author": "Meathill <meathill@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/meathill/live-screen/issues"
-  },
   "homepage": "https://github.com/meathill/live-screen#readme",
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^3.1.0",
-    "eslint": "^8.23.1",
-    "eslint-plugin-vue": "^9.5.1",
-    "pug": "^3.0.2",
-    "stylus": "^0.59.0",
-    "vite": "^3.1.3"
-  },
   "dependencies": {
-    "bootstrap": "^5.2.1",
-    "vue": "^3.2.0"
+    "@opennextjs/cloudflare": "^1.19.11",
+    "lucide-react": "^0.475.0",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-icons": "^5.4.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.94.0"
   }
 }

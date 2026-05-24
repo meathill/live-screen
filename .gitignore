@@ -1,8 +1,29 @@
 # IDE
 .idea
 
-# repo
+# deps
 node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# cloudflare / opennext
+/.open-next/
+/.wrangler/
+cloudflare-env.d.ts
 
 # build
 dist
+*.tsbuildinfo
+
+# claude code (local-only settings)
+.claude/settings.local.json
+
+# misc
+.DS_Store
+*.pem
+
+# env
+.env*.local

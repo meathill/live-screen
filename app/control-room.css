@@ -1,0 +1,654 @@
+/* ===========================================================
+ * Control Room — operator dashboard
+ * Same Mui Studio palette, denser and more workmanlike.
+ * =========================================================== */
+
+.cr-page {
+  position: fixed;
+  inset: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+#cr-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─────────────────────────── Top bar ─────────────────────────── */
+.cr-topbar {
+  height: 56px;
+  background: var(--color-cream);
+  border-bottom: 2px solid var(--color-ink);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.cr-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+.cr-brand-mark {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-ink);
+  border-radius: 6px;
+  background: var(--color-yellow);
+  box-shadow: 0 2px 0 var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.cr-brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cr-brand-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-mute);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+
+.cr-topbar-spacer {
+  flex: 1;
+}
+
+.cr-state-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-fluff);
+  color: var(--color-ink);
+}
+.cr-state-pill.live {
+  background: var(--color-tongue);
+  color: white;
+}
+.cr-state-pill.fullcode {
+  background: var(--color-ink);
+  color: var(--color-yellow);
+}
+.cr-state-pill.soon {
+  background: var(--color-yellow);
+}
+.cr-state-pill.brb {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+  border-color: var(--color-info);
+}
+.cr-state-pill.ending {
+  background: var(--color-paper-deep);
+}
+
+.cr-reset {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  background: transparent;
+  border: 1.5px solid var(--color-rule-strong);
+  color: var(--color-mute);
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.cr-reset:hover {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+/* ─────────────────────────── Layout ─────────────────────────── */
+.cr-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 460px;
+  overflow: hidden;
+}
+.cr-main {
+  overflow-y: auto;
+  padding: 24px 28px 80px;
+  min-width: 0;
+}
+.cr-aside {
+  background: var(--color-cream);
+  border-left: 2px solid var(--color-ink);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ─────────────────────── Scene switcher ─────────────────────── */
+.cr-scene-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.cr-scene-btn {
+  background: var(--color-cream);
+  border: 2px solid var(--color-ink);
+  border-radius: 10px;
+  padding: 12px 10px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: inherit;
+  color: var(--color-ink);
+  box-shadow: 0 3px 0 var(--color-ink);
+  transition: transform 100ms var(--ease-out), box-shadow 100ms;
+  position: relative;
+  min-width: 0;
+}
+.cr-scene-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--color-ink);
+}
+.cr-scene-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--color-ink);
+}
+.cr-scene-btn.active {
+  background: var(--color-yellow);
+}
+.cr-scene-btn.active.live {
+  background: var(--color-tongue);
+  color: white;
+}
+.cr-scene-btn.active.fullcode {
+  background: var(--color-ink);
+  color: var(--color-yellow);
+}
+.cr-scene-btn.active.brb {
+  background: var(--color-info);
+  color: white;
+}
+.cr-scene-btn.active.ending {
+  background: var(--color-paper-deep);
+}
+.cr-scene-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cr-scene-key {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────── Sections ─────────────────────────── */
+.cr-section {
+  background: var(--color-cream);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 10px;
+  padding: 18px 20px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 0 var(--color-ink);
+}
+.cr-section-h {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--color-rule-strong);
+}
+.cr-section-h h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+.cr-section-h .cr-section-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-mute);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.cr-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  min-width: 0;
+}
+.cr-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  min-width: 0;
+}
+.cr-grid-2 > *,
+.cr-grid-3 > * {
+  min-width: 0;
+}
+
+/* ─────────────────────────── Inputs ─────────────────────────── */
+.cr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cr-field label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+.cr-input,
+.cr-select,
+.cr-textarea {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-ink);
+  background: white;
+  border: 1.5px solid var(--color-rule-strong);
+  border-radius: 6px;
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 120ms;
+  width: 100%;
+  box-sizing: border-box;
+}
+.cr-input:focus,
+.cr-select:focus,
+.cr-textarea:focus {
+  border-color: var(--color-yellow-deep);
+  box-shadow: var(--focus-ring);
+}
+.cr-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.cr-input.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.cr-input.big {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  padding: 10px 12px;
+}
+
+/* segmented control */
+.cr-seg {
+  display: flex;
+  gap: 0;
+  background: var(--color-paper-deep);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-rule-strong);
+}
+.cr-seg button {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  padding: 7px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 120ms, color 120ms;
+  white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cr-seg button.active {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  font-weight: 800;
+  box-shadow: 0 1px 0 var(--color-yellow-deep);
+}
+.cr-seg button:hover:not(.active) {
+  background: rgb(58 46 35 / 0.05);
+}
+
+/* Buttons */
+.cr-btn {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-yellow);
+  color: var(--color-ink);
+  box-shadow: 0 2px 0 var(--color-ink);
+  transition: transform 100ms, box-shadow 100ms;
+}
+.cr-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--color-ink);
+}
+.cr-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--color-ink);
+}
+.cr-btn.ghost {
+  background: transparent;
+  border-color: var(--color-rule-strong);
+  color: var(--color-ink-soft);
+  box-shadow: none;
+  font-weight: 600;
+}
+.cr-btn.ghost:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+  box-shadow: 0 1px 0 var(--color-ink);
+}
+.cr-btn.danger {
+  background: var(--color-tongue);
+  color: white;
+}
+
+/* Toggle row */
+.cr-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+.cr-toggle-row label {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-ink);
+}
+.cr-toggle-row .hint {
+  font-size: 12px;
+  color: var(--color-mute);
+}
+
+/* native checkbox restyle */
+.cr-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--color-paper-deep);
+  border: 1.5px solid var(--color-rule-strong);
+  cursor: pointer;
+  transition: background 150ms;
+  flex-shrink: 0;
+}
+.cr-switch::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 50%;
+  transition: transform 150ms;
+}
+.cr-switch.on {
+  background: var(--color-yellow);
+  border-color: var(--color-ink);
+}
+.cr-switch.on::after {
+  transform: translateX(17px);
+}
+
+/* ─────────────────────────── Agenda editor ─────────────────────────── */
+.cr-agenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.cr-agenda-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 10px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: 6px;
+}
+.cr-agenda-row.doing {
+  background: var(--color-fluff);
+  border-color: var(--color-corgi);
+}
+.cr-agenda-row.done {
+  background: var(--color-paper-deep);
+  opacity: 0.85;
+}
+.cr-agenda-row.done .cr-input {
+  text-decoration: line-through;
+  color: var(--color-mute);
+}
+.cr-agenda-status {
+  display: flex;
+  gap: 2px;
+  background: white;
+  border: 1.5px solid var(--color-rule-strong);
+  border-radius: 5px;
+  padding: 2px;
+}
+.cr-agenda-status button {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  color: var(--color-mute);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cr-agenda-status button.active {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+.cr-agenda-status button:hover:not(.active) {
+  background: var(--color-fluff);
+}
+.cr-agenda-row .cr-input {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+}
+.cr-agenda-row .cr-input:focus {
+  background: white;
+  border-color: var(--color-yellow-deep);
+}
+.cr-x {
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--color-mute);
+  font-size: 16px;
+  line-height: 1;
+}
+.cr-x:hover {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+/* ─────────────────────────── Quick presets ─────────────────────────── */
+.cr-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.cr-preset {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  background: var(--color-fluff);
+  border: 1px solid var(--color-corgi);
+  color: var(--color-yellow-deep);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.cr-preset:hover {
+  background: var(--color-corgi);
+  color: var(--color-ink);
+}
+
+/* ─────────────────────────── Tag editor ─────────────────────────── */
+.cr-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.cr-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-fluff);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  padding: 3px 4px 3px 12px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.cr-tag-x {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: var(--color-mute);
+}
+.cr-tag-x:hover {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+/* ─────────────────────────── Preview pane ─────────────────────────── */
+.cr-preview {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.cr-preview-h {
+  padding: 14px 18px;
+  border-bottom: 1px dashed var(--color-rule-strong);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cr-preview-h h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-ink);
+  margin: 0;
+}
+.cr-preview-frame {
+  flex: 1;
+  position: relative;
+  background: #2a221a;
+  overflow: hidden;
+}
+.cr-preview-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.cr-preview-footer {
+  padding: 12px 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-mute);
+  border-top: 1px dashed var(--color-rule-strong);
+  line-height: 1.5;
+}
+.cr-preview-footer .kbd {
+  display: inline-block;
+  background: var(--color-cream);
+  border: 1px solid var(--color-rule-strong);
+  border-bottom-width: 2px;
+  padding: 0 5px;
+  border-radius: 3px;
+  color: var(--color-ink);
+  margin: 0 2px;
+}
+.cr-preview-footer a {
+  color: var(--color-yellow-deep);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-corgi);
+}
+
+/* ─────────────────────── Timer / countdown ─────────────────────── */
+.cr-timer-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  line-height: 1;
+}
+.cr-timer-display.muted {
+  color: var(--color-mute);
+}
+.cr-timer-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
